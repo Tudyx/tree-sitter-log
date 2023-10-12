@@ -1,0 +1,7 @@
+2023-10-12T15:11:07.666 helix_lsp::transport [ERROR] taplo err <- " INFO taplo: LSP server listening transport=\"stdio\"\n"
+2023-10-08T23:26:55.153 helix_lsp::transport [ERROR] taplo err <- " INFO taplo: received shutdown request id=Number(1) method=shutdown\n"
+2023-10-08T23:26:55.154 helix_lsp::transport [ERROR] err: <- Other(failed to send a message to server
+
+Caused by:
+    channel closed)
+2023-10-08T23:26:55.154 helix_lsp::transport [ERROR] taplo err: <- StreamClosed

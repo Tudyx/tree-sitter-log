@@ -1,0 +1,136 @@
+[
+  {
+    "type": "constant",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "level",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "error_level",
+          "named": true
+        },
+        {
+          "type": "info_level",
+          "named": true
+        },
+        {
+          "type": "warning_level",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "log_date",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "year_month_date",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "log_time",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "time_with_offset",
+          "named": true
+        },
+        {
+          "type": "time_without_offset",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "logs",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "constant",
+          "named": true
+        },
+        {
+          "type": "level",
+          "named": true
+        },
+        {
+          "type": "log_date",
+          "named": true
+        },
+        {
+          "type": "log_time",
+          "named": true
+        },
+        {
+          "type": "quoted_string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "quoted_string",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "error_level",
+    "named": true
+  },
+  {
+    "type": "info_level",
+    "named": true
+  },
+  {
+    "type": "time_with_offset",
+    "named": true
+  },
+  {
+    "type": "time_without_offset",
+    "named": true
+  },
+  {
+    "type": "warning_level",
+    "named": true
+  },
+  {
+    "type": "year_month_date",
+    "named": true
+  }
+]
