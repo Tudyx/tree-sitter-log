@@ -66,6 +66,11 @@ module.exports = grammar({
 				repeat(token.immediate(prec(1, /[^"\n]+/)),),
 				'"'
 			),
+			seq(
+				"'",
+				repeat(token.immediate(prec(1, /[^'\n]+/)),),
+				"'"
+			),
 		),
 
 		_important: $ => choice(
@@ -84,13 +89,13 @@ module.exports = grammar({
 			ipv4,
 			optional(/[:]\d+/),
 		),
-		true_or_false : $ => /true|True|false|False/,
+		true_or_false : $ => /true|True|false|False|null|None/,
 
 		// Add any additional captures here!
 		constant : $ => choice(
 			$._ipv4,
 			$._uuid,
-			/\s\d+/,
+			/\d+/,
 			$.true_or_false
 		),
 

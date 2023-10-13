@@ -5,3 +5,4 @@
 Caused by:
     channel closed)
 2023-10-08T23:26:55.154 helix_lsp::transport [ERROR] taplo err: <- StreamClosed
+2023-10-13T18:34:11.144 helix_view::editor [ERROR] editor error: no such command: '/tmp/gg.rs'
