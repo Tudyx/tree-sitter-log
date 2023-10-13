@@ -1,14 +1,14 @@
 {
   "name": "log",
   "rules": {
-    "logs": {
+    "log_file": {
       "type": "REPEAT",
       "content": {
         "type": "CHOICE",
         "members": [
           {
             "type": "SYMBOL",
-            "name": "_logline"
+            "name": "_log_line"
           },
           {
             "type": "SYMBOL",
@@ -17,7 +17,7 @@
         ]
       }
     },
-    "_logline": {
+    "_log_line": {
       "type": "SEQ",
       "members": [
         {
@@ -162,6 +162,19 @@
       "type": "PATTERN",
       "value": "(ALERT|CRITICAL|EMERGENCY|ERROR|FAILURE|FAIL|Fatal|FATAL|Error|EE|error|eror|err|fatal)"
     },
+    "_important": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "constant"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "quoted_string"
+        }
+      ]
+    },
     "quoted_string": {
       "type": "CHOICE",
       "members": [
@@ -221,19 +234,6 @@
         }
       ]
     },
-    "_important": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "constant"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "quoted_string"
-        }
-      ]
-    },
     "_uuid": {
       "type": "CHOICE",
       "members": [
@@ -272,6 +272,10 @@
       "type": "PATTERN",
       "value": "true|True|false|False|null|None"
     },
+    "identifier": {
+      "type": "PATTERN",
+      "value": "[a-z_]+"
+    },
     "constant": {
       "type": "CHOICE",
       "members": [
@@ -290,6 +294,10 @@
         {
           "type": "SYMBOL",
           "name": "true_or_false"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
         }
       ]
     }

@@ -3,7 +3,6 @@ const rfc3339_delimiter = /[ tT]/;
 const rfc3339_time = /([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60)([.][0-9]+)?/;
 const rfc3339_offset = /([zZ])|([+-]([01][0-9]|2[0-3]):[0-5][0-9])/;
 
-const module_path = /\s?[-_a-zA-Z0-9:]*/;
 const newline = /\r?\n/;
 const ipv4 = /([0-9]{1,3}\.){3}[0-9]{1,3}(\/([0-9]|[1-2][0-9]|3[0-2]))?/;
 const uuid_with_sep = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
@@ -19,18 +18,27 @@ const error = /(ALERT|CRITICAL|EMERGENCY|ERROR|FAILURE|FAIL|Fatal|FATAL|Error|EE
 module.exports = grammar({
 	name: 'log',
 
+	// word: $ => $.identifier,
+	// This fix the parsing but take looooong time.
+	// extras: $ => [
+	// 	/.*/,
+	// 	/\s/
+	// ],
+
 	rules: {
-		logs: $ => repeat(choice($._logline, $.comment)),
+
+		log_file: $ => repeat(choice($._log_line, $.comment)),
 
 		// Match an individual log line
-		_logline : $ => seq (
+		_log_line: $ => seq(
 			$.log_date,
 			$.log_time,
 			$.level,
 			repeat($._important),
+			// '\n'
 		),
-		log_date : $ => $.year_month_date,
-		log_time : $ => choice(
+		log_date: $ => $.year_month_date,
+		log_time: $ => choice(
 			$.time_with_offset,
 			$.time_without_offset
 		),
@@ -39,27 +47,31 @@ module.exports = grammar({
 		time_without_offset: $ => token(rfc3339_time),
 		// comment in annotated logs
 		comment: $ =>
-  		token(seq(
-  			"#",
-  			/[^\n]+/,
-  			newline
-  		)),
+			token(seq(
+				"#",
+				/[^\n]+/,
+				newline
+			)),
 
 		// Different log levels
 		level: $ => choice(
-      $.trace_level,
-      $.debug_level,
-      $.info_level,
-      $.warning_level,
-      $.error_level,
+			$.trace_level,
+			$.debug_level,
+			$.info_level,
+			$.warning_level,
+			$.error_level,
 		),
-    trace_level : $ => trace,
-    debug_level : $ => debug,
-    info_level : $ => info,
-		warning_level : $ => warning,
-    error_level : $ => error,    
+		trace_level: $ => trace,
+		debug_level: $ => debug,
+		info_level: $ => info,
+		warning_level: $ => warning,
+		error_level: $ => error,
 
-		// quoted string
+		_important: $ => choice(
+			$.constant,
+			$.quoted_string,
+		),
+
 		quoted_string: $ => choice(
 			seq(
 				'"',
@@ -73,10 +85,6 @@ module.exports = grammar({
 			),
 		),
 
-		_important: $ => choice(
-			$.constant,
-			$.quoted_string,
-		),
 
 		// uuid with or without separators
 		_uuid: $ => choice(
@@ -89,14 +97,19 @@ module.exports = grammar({
 			ipv4,
 			optional(/[:]\d+/),
 		),
-		true_or_false : $ => /true|True|false|False|null|None/,
+
+		true_or_false: $ => /true|True|false|False|null|None/,
+
+		
+		identifier: $ => /[a-z_]+/,
 
 		// Add any additional captures here!
-		constant : $ => choice(
+		constant: $ => choice(
 			$._ipv4,
 			$._uuid,
 			/\d+/,
-			$.true_or_false
+			$.true_or_false,
+			$.identifier
 		),
 
 	}
