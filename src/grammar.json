@@ -121,12 +121,12 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "PATTERN",
-          "value": "(TRACE|Trace|verbose|verb)"
+          "type": "SYMBOL",
+          "name": "trace_level"
         },
         {
-          "type": "PATTERN",
-          "value": "(DEBUG|Debug|debug|dbg)"
+          "type": "SYMBOL",
+          "name": "debug_level"
         },
         {
           "type": "SYMBOL",
@@ -141,6 +141,14 @@
           "name": "error_level"
         }
       ]
+    },
+    "trace_level": {
+      "type": "PATTERN",
+      "value": "(TRACE|Trace|verbose|verb)"
+    },
+    "debug_level": {
+      "type": "PATTERN",
+      "value": "(DEBUG|Debug|debug|dbg)"
     },
     "info_level": {
       "type": "PATTERN",

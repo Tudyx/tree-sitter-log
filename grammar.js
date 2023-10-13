@@ -47,12 +47,14 @@ module.exports = grammar({
 
 		// Different log levels
 		level: $ => choice(
-      trace,
-      debug,
+      $.trace_level,
+      $.debug_level,
       $.info_level,
       $.warning_level,
       $.error_level,
 		),
+    trace_level : $ => trace,
+    debug_level : $ => debug,
     info_level : $ => info,
 		warning_level : $ => warning,
     error_level : $ => error,    

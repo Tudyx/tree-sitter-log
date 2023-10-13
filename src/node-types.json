@@ -10,14 +10,22 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "debug_level",
+          "named": true
+        },
         {
           "type": "error_level",
           "named": true
         },
         {
           "type": "info_level",
+          "named": true
+        },
+        {
+          "type": "trace_level",
           "named": true
         },
         {
@@ -110,6 +118,10 @@
     "named": true
   },
   {
+    "type": "debug_level",
+    "named": true
+  },
+  {
     "type": "error_level",
     "named": true
   },
@@ -123,6 +135,10 @@
   },
   {
     "type": "time_without_offset",
+    "named": true
+  },
+  {
+    "type": "trace_level",
     "named": true
   },
   {

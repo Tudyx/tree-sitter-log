@@ -29,8 +29,8 @@ enum {
   sym_time_with_offset = 2,
   sym_time_without_offset = 3,
   sym_comment = 4,
-  aux_sym_level_token1 = 5,
-  aux_sym_level_token2 = 6,
+  sym_trace_level = 5,
+  sym_debug_level = 6,
   sym_info_level = 7,
   sym_warning_level = 8,
   sym_error_level = 9,
@@ -63,8 +63,8 @@ static const char * const ts_symbol_names[] = {
   [sym_time_with_offset] = "time_with_offset",
   [sym_time_without_offset] = "time_without_offset",
   [sym_comment] = "comment",
-  [aux_sym_level_token1] = "level_token1",
-  [aux_sym_level_token2] = "level_token2",
+  [sym_trace_level] = "trace_level",
+  [sym_debug_level] = "debug_level",
   [sym_info_level] = "info_level",
   [sym_warning_level] = "warning_level",
   [sym_error_level] = "error_level",
@@ -97,8 +97,8 @@ static const TSSymbol ts_symbol_map[] = {
   [sym_time_with_offset] = sym_time_with_offset,
   [sym_time_without_offset] = sym_time_without_offset,
   [sym_comment] = sym_comment,
-  [aux_sym_level_token1] = aux_sym_level_token1,
-  [aux_sym_level_token2] = aux_sym_level_token2,
+  [sym_trace_level] = sym_trace_level,
+  [sym_debug_level] = sym_debug_level,
   [sym_info_level] = sym_info_level,
   [sym_warning_level] = sym_warning_level,
   [sym_error_level] = sym_error_level,
@@ -146,13 +146,13 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
-  [aux_sym_level_token1] = {
-    .visible = false,
-    .named = false,
+  [sym_trace_level] = {
+    .visible = true,
+    .named = true,
   },
-  [aux_sym_level_token2] = {
-    .visible = false,
-    .named = false,
+  [sym_debug_level] = {
+    .visible = true,
+    .named = true,
   },
   [sym_info_level] = {
     .visible = true,
@@ -1338,14 +1338,14 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(sym_comment);
       END_STATE();
     case 251:
-      ACCEPT_TOKEN(aux_sym_level_token1);
+      ACCEPT_TOKEN(sym_trace_level);
       END_STATE();
     case 252:
-      ACCEPT_TOKEN(aux_sym_level_token1);
+      ACCEPT_TOKEN(sym_trace_level);
       if (lookahead == 'o') ADVANCE(161);
       END_STATE();
     case 253:
-      ACCEPT_TOKEN(aux_sym_level_token2);
+      ACCEPT_TOKEN(sym_debug_level);
       END_STATE();
     case 254:
       ACCEPT_TOKEN(sym_info_level);
@@ -1699,8 +1699,8 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym_time_with_offset] = ACTIONS(1),
     [sym_time_without_offset] = ACTIONS(1),
     [sym_comment] = ACTIONS(1),
-    [aux_sym_level_token1] = ACTIONS(1),
-    [aux_sym_level_token2] = ACTIONS(1),
+    [sym_trace_level] = ACTIONS(1),
+    [sym_debug_level] = ACTIONS(1),
     [sym_info_level] = ACTIONS(1),
     [sym_warning_level] = ACTIONS(1),
     [sym_error_level] = ACTIONS(1),
@@ -1871,8 +1871,8 @@ static const uint16_t ts_small_parse_table[] = {
     STATE(2), 1,
       sym_level,
     ACTIONS(61), 5,
-      aux_sym_level_token1,
-      aux_sym_level_token2,
+      sym_trace_level,
+      sym_debug_level,
       sym_info_level,
       sym_warning_level,
       sym_error_level,
@@ -1902,8 +1902,8 @@ static const uint16_t ts_small_parse_table[] = {
       aux_sym_logs_repeat1,
   [222] = 1,
     ACTIONS(75), 5,
-      aux_sym_level_token1,
-      aux_sym_level_token2,
+      sym_trace_level,
+      sym_debug_level,
       sym_info_level,
       sym_warning_level,
       sym_error_level,
