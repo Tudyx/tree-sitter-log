@@ -7,4 +7,4 @@
 (comment) @comment
 (quoted_string) @string
 (constant) @constant.numeric
-; (true_or_false) @constant.builtin
+(true_or_false) @constant.builtin

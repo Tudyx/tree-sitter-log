@@ -241,6 +241,10 @@
         }
       ]
     },
+    "true_or_false": {
+      "type": "PATTERN",
+      "value": "true|false"
+    },
     "constant": {
       "type": "CHOICE",
       "members": [
@@ -257,8 +261,8 @@
           "value": "\\s\\d+"
         },
         {
-          "type": "PATTERN",
-          "value": "true|false"
+          "type": "SYMBOL",
+          "name": "true_or_false"
         }
       ]
     }

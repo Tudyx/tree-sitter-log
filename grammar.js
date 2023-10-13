@@ -84,13 +84,14 @@ module.exports = grammar({
 			ipv4,
 			optional(/[:]\d+/),
 		),
+		true_or_false : $ => /true|True|false|False/,
 
 		// Add any additional captures here!
 		constant : $ => choice(
 			$._ipv4,
 			$._uuid,
 			/\s\d+/,
-			/true|false/,
+			$.true_or_false
 		),
 
 	}
