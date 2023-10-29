@@ -1,116 +1,149 @@
-const rfc3339_date = /([0-9]+)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])/;
-const rfc3339_delimiter = /[ tT]/;
-const rfc3339_time = /([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60)([.][0-9]+)?/;
-const rfc3339_offset = /([zZ])|([+-]([01][0-9]|2[0-3]):[0-5][0-9])/;
-
-const newline = /\r?\n/;
-const ipv4 = /([0-9]{1,3}\.){3}[0-9]{1,3}(\/([0-9]|[1-2][0-9]|3[0-2]))?/;
-const uuid_with_sep = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
-const uuid_without_sep = /[0-9a-f]{32}/;
-
-// trace/verbose and debug are not in helix theme
-const trace = /(TRACE|Trace|verbose|verb)/
-const debug = /(DEBUG|Debug|debug|dbg)/
-const info = /(HINT|INFO|INFORMATION|Info|NOTICE|II|info|information)/;
-const warning = /(WARNING|WARN|WW|warning|warn)/;
-const error = /(ALERT|CRITICAL|EMERGENCY|ERROR|FAILURE|FAIL|Fatal|FATAL|Error|EE|error|eror|err|fatal)/;
+const
+	hexDigit = /[0-9a-fA-F]/,
+	hexDigits = seq(hexDigit, repeat(seq(optional('_'), hexDigit))),
+	// 2022-12-25
+	rfc3339_date = /([0-9]+)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])/,
+	// 25/12/2022
+	cultural_date = /(0[1-9]|[12][0-9]|3[01])[-\./](0[1-9]|1[012])[-\./]([0-9]+)/,
+	rfc3339_delimiter = /[ tT]/,
+	// 09:29:02
+	rfc3339_time = /([01][0-9]|2[0-3]):([0-5][0-9])(:([0-5][0-9]|60))?([\.,][0-9]+)?/,
+	rfc3339_offset = /([zZ])|([+-]([01][0-9]|2[0-3]):[0-5][0-9])/;
 
 module.exports = grammar({
-	name: 'log',
-
-	// word: $ => $.identifier,
-	// This fix the parsing but take looooong time.
-	// extras: $ => [
-	// 	/.*/,
-	// 	/\s/
+	name: 'debug',
+	// conflicts: $ => [
+	//   [$.error_parenthesis, $._left_parenthesis],
+	//   [$.error_parenthesis, $._right_parenthesis]
 	// ],
 
+	// word: $ => $.word,
+	// extras: $ => [
+	//     // $.comment,
+	//     /\s/,
+	//   ],
+
 	rules: {
-
-		log_file: $ => repeat(choice($._log_line, $.comment)),
-
-		// Match an individual log line
-		_log_line: $ => seq(
-			$.log_date,
-			$.log_time,
-			$.level,
-			repeat($._important),
-			// '\n'
+		log_file: $ => repeat(
+			choice(
+				$.log_level,
+				$.date,
+				$.string_literal,
+				$.number,
+				$._left_parenthesis,
+				$._right_parenthesis,
+				$._left_bracket,
+				$._right_bracket,
+				$.word
+			)
 		),
-		log_date: $ => $.year_month_date,
-		log_time: $ => choice(
-			$.time_with_offset,
-			$.time_without_offset
+		log_level: $ => choice(
+			$.trace,
+			$.debug,
+			$.info,
+			$.warn,
+			$.error,
 		),
-		year_month_date: $ => token(seq(rfc3339_date, rfc3339_delimiter)),
-		time_with_offset: $ => token(seq(rfc3339_time, rfc3339_offset)),
-		time_without_offset: $ => token(rfc3339_time),
-		// comment in annotated logs
-		comment: $ =>
-			token(seq(
-				"#",
-				/[^\n]+/,
-				newline
+		trace: $ => choice("trace", "Trace", "TRACE", "verbose", "verb"),
+		debug: $ => choice("debug", "Debug", "DEBUG"),
+		info: $ => choice("info", "Info", "INFO"),
+		warn: $ => choice("warn", "Warn", "WARN", "warning", "Warning", "WARNING"),
+		// TODO: a more elegant way to handle optional ':' suffix should exist.
+		error: $ => choice("error", "error:", "Error", "ERROR", "ALERT", "CRITICAL", "EMERGENCY", "FAILURE", "FAIL", "fatal", "Fatal", "FATAL"),
+
+
+		date: $ => choice(
+			$.year_month_day,
+			$.time,
+		),
+		year_month_day: $ => token(seq(choice(rfc3339_date, cultural_date), optional(rfc3339_delimiter))),
+		time: $ => choice(
+			$._time_with_offset,
+			$._time_without_offset
+		),
+		_time_with_offset: $ => token(seq(rfc3339_time, optional(' '), rfc3339_offset)),
+		_time_without_offset: $ => token(rfc3339_time),
+		boolean_literal: $ => choice("true", "True", "false", "False"),
+
+		// https://github.com/tree-sitter/tree-sitter-go/blob/bbaa67a180cfe0c943e50c55130918be8efb20bd/grammar.js#L850C1-L880C8
+		string_literal: $ => choice(
+			$._raw_string_literal,
+			$._interpreted_string_literal,
+			// $.char_literal,
+		),
+
+		// char_literal: $ => token(seq(
+		//   optional('b'),
+		//   '\'',
+		//   optional(choice(
+		//     seq('\\', choice(
+		//       /[^xu]/,
+		//       /u[0-9a-fA-F]{4}/,
+		//       /u{[0-9a-fA-F]+}/,
+		//       /x[0-9a-fA-F]{2}/
+		//     )),
+		//     /[^\\']/
+		//   )),
+		//   '\''
+		// )),
+		_raw_string_literal: _ => token(seq(
+			'`',
+			repeat(/[^`]/),
+			'`',
+		)),
+		// _raw_string_literal: _ => token(seq(
+		//   "'",
+		//   repeat(/[^']/),
+		//   "'",
+		// )),
+
+		_interpreted_string_literal: $ => seq(
+			'"',
+			repeat(choice(
+				$._interpreted_string_literal_basic_content,
+				$._escape_sequence,
 			)),
-
-		// Different log levels
-		level: $ => choice(
-			$.trace_level,
-			$.debug_level,
-			$.info_level,
-			$.warning_level,
-			$.error_level,
+			token.immediate('"'),
 		),
-		trace_level: $ => trace,
-		debug_level: $ => debug,
-		info_level: $ => info,
-		warning_level: $ => warning,
-		error_level: $ => error,
+		_interpreted_string_literal_basic_content: _ => token.immediate(prec(1, /[^"\n\\]+/)),
 
-		_important: $ => choice(
-			$.constant,
-			$.quoted_string,
-		),
-
-		quoted_string: $ => choice(
-			seq(
-				'"',
-				repeat(token.immediate(prec(1, /[^"\n]+/)),),
-				'"'
+		_escape_sequence: _ => token.immediate(seq(
+			'\\',
+			choice(
+				/[^xuU]/,
+				/\d{2,3}/,
+				/x[0-9a-fA-F]{2,}/,
+				/u[0-9a-fA-F]{4}/,
+				/U[0-9a-fA-F]{8}/,
 			),
-			seq(
-				"'",
-				repeat(token.immediate(prec(1, /[^'\n]+/)),),
-				"'"
-			),
-		),
+		)),
 
+		// number: $ => token(hexDigits),
+		// number: $ => token(sep1(hexDigits, /[.:-]/)),
+		// number: $ => choice($._number_w, seq('(', $._number_w, ')')),
 
-		// uuid with or without separators
-		_uuid: $ => choice(
-			uuid_with_sep,
-			uuid_without_sep
-		),
+		number: $ => token(sep1(hexDigits, /[.:-]/)),
+		_left_parenthesis: $ => '(',
+		_right_parenthesis: $ => ')',
+		_left_bracket: $ => '[',
+		_right_bracket: $ => ']',
 
-		// ipv4 with optional subnet and optional port
-		_ipv4: $ => seq(
-			ipv4,
-			optional(/[:]\d+/),
-		),
-
-		true_or_false: $ => /true|True|false|False|null|None/,
-
-		
-		identifier: $ => /[a-z_]+/,
-
-		// Add any additional captures here!
-		constant: $ => choice(
-			$._ipv4,
-			$._uuid,
-			/\d+/,
-			$.true_or_false,
-			$.identifier
-		),
-
+		// Match all other things in the log which are not highlighted
+		word: $ => /[^()T\[\]"\s]+/,
 	}
+
 });
+
+/**
+ * Creates a rule to match one or more occurrences of `rule` separated by `sep`
+ *
+ * @param {RuleOrLiteral} rule
+ *
+ * @param {RuleOrLiteral} separator
+ *
+ * @return {SeqRule}
+ *
+ */
+function sep1(rule, separator) {
+	return seq(rule, repeat(seq(separator, rule)));
+}

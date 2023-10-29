@@ -1,25 +1,6 @@
 [
   {
-    "type": "constant",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "true_or_false",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "level",
+    "type": "date",
     "named": true,
     "fields": {},
     "children": {
@@ -27,42 +8,30 @@
       "required": true,
       "types": [
         {
-          "type": "debug_level",
+          "type": "time",
           "named": true
         },
         {
-          "type": "error_level",
-          "named": true
-        },
-        {
-          "type": "info_level",
-          "named": true
-        },
-        {
-          "type": "trace_level",
-          "named": true
-        },
-        {
-          "type": "warning_level",
+          "type": "year_month_day",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "log_date",
+    "type": "debug",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "year_month_date",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
+  },
+  {
+    "type": "error",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "info",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "log_file",
@@ -73,34 +42,30 @@
       "required": false,
       "types": [
         {
-          "type": "comment",
+          "type": "date",
           "named": true
         },
         {
-          "type": "constant",
+          "type": "log_level",
           "named": true
         },
         {
-          "type": "level",
+          "type": "number",
           "named": true
         },
         {
-          "type": "log_date",
+          "type": "string_literal",
           "named": true
         },
         {
-          "type": "log_time",
-          "named": true
-        },
-        {
-          "type": "quoted_string",
+          "type": "word",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "log_time",
+    "type": "log_level",
     "named": true,
     "fields": {},
     "children": {
@@ -108,18 +73,45 @@
       "required": true,
       "types": [
         {
-          "type": "time_with_offset",
+          "type": "debug",
           "named": true
         },
         {
-          "type": "time_without_offset",
+          "type": "error",
+          "named": true
+        },
+        {
+          "type": "info",
+          "named": true
+        },
+        {
+          "type": "trace",
+          "named": true
+        },
+        {
+          "type": "warn",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "quoted_string",
+    "type": "string_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "time",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "trace",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "warn",
     "named": true,
     "fields": {}
   },
@@ -128,51 +120,147 @@
     "named": false
   },
   {
-    "type": "'",
+    "type": "ALERT",
     "named": false
   },
   {
-    "type": "comment",
+    "type": "CRITICAL",
+    "named": false
+  },
+  {
+    "type": "DEBUG",
+    "named": false
+  },
+  {
+    "type": "Debug",
+    "named": false
+  },
+  {
+    "type": "EMERGENCY",
+    "named": false
+  },
+  {
+    "type": "ERROR",
+    "named": false
+  },
+  {
+    "type": "Error",
+    "named": false
+  },
+  {
+    "type": "FAIL",
+    "named": false
+  },
+  {
+    "type": "FAILURE",
+    "named": false
+  },
+  {
+    "type": "FATAL",
+    "named": false
+  },
+  {
+    "type": "False",
+    "named": false
+  },
+  {
+    "type": "Fatal",
+    "named": false
+  },
+  {
+    "type": "INFO",
+    "named": false
+  },
+  {
+    "type": "Info",
+    "named": false
+  },
+  {
+    "type": "TRACE",
+    "named": false
+  },
+  {
+    "type": "Trace",
+    "named": false
+  },
+  {
+    "type": "True",
+    "named": false
+  },
+  {
+    "type": "WARN",
+    "named": false
+  },
+  {
+    "type": "WARNING",
+    "named": false
+  },
+  {
+    "type": "Warn",
+    "named": false
+  },
+  {
+    "type": "Warning",
+    "named": false
+  },
+  {
+    "type": "debug",
+    "named": false
+  },
+  {
+    "type": "error",
+    "named": false
+  },
+  {
+    "type": "error:",
+    "named": false
+  },
+  {
+    "type": "false",
+    "named": false
+  },
+  {
+    "type": "fatal",
+    "named": false
+  },
+  {
+    "type": "info",
+    "named": false
+  },
+  {
+    "type": "number",
     "named": true
   },
   {
-    "type": "debug_level",
+    "type": "trace",
+    "named": false
+  },
+  {
+    "type": "true",
+    "named": false
+  },
+  {
+    "type": "verb",
+    "named": false
+  },
+  {
+    "type": "verbose",
+    "named": false
+  },
+  {
+    "type": "warn",
+    "named": false
+  },
+  {
+    "type": "warning",
+    "named": false
+  },
+  {
+    "type": "word",
     "named": true
   },
   {
-    "type": "error_level",
-    "named": true
-  },
-  {
-    "type": "identifier",
-    "named": true
-  },
-  {
-    "type": "info_level",
-    "named": true
-  },
-  {
-    "type": "time_with_offset",
-    "named": true
-  },
-  {
-    "type": "time_without_offset",
-    "named": true
-  },
-  {
-    "type": "trace_level",
-    "named": true
-  },
-  {
-    "type": "true_or_false",
-    "named": true
-  },
-  {
-    "type": "warning_level",
-    "named": true
-  },
-  {
-    "type": "year_month_date",
+    "type": "year_month_day",
     "named": true
   }
 ]

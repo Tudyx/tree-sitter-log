@@ -4,7 +4,9 @@
 (error_level) @error
 (log_date) @keyword
 (log_time) @constant
-(comment) @comment
+; (comment) @comment
 (quoted_string) @string
-(constant) @constant.numeric
+; (uuid_gen) @constant.numeric
+; (constant) @constant.numeric
+(constant) @constant.builtin
 (true_or_false) @constant.builtin
