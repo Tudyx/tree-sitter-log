@@ -125,6 +125,14 @@
     "named": false
   },
   {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
     "type": "ALERT",
     "named": false
   },
@@ -181,6 +189,10 @@
     "named": false
   },
   {
+    "type": "T",
+    "named": false
+  },
+  {
     "type": "TRACE",
     "named": false
   },
@@ -206,6 +218,14 @@
   },
   {
     "type": "Warning",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
     "named": false
   },
   {

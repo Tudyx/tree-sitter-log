@@ -30,10 +30,7 @@ module.exports = grammar({
 				$.date,
 				$.string_literal,
 				$.number,
-				$._left_parenthesis,
-				$._right_parenthesis,
-				$._left_bracket,
-				$._right_bracket,
+				$._word_separator,
 				$.word
 			)
 		),
@@ -122,20 +119,23 @@ module.exports = grammar({
 		// number: $ => token(sep1(hexDigits, /[.:-]/)),
 		// number: $ => choice($._number_w, seq('(', $._number_w, ')')),
 
-    number: $ => choice(
-      token(sep1(hexDigits, /[-\.:]/)),
-      choice(
-        /\d+/,
-        /[0-9a-fA-F]{40}/,
-        /[0-9a-fA-F]{32}/,
-        /[0-9a-fA-F]{10}/,
-        /[0-9a-fA-F]{7}/,
-        /0x[a-fA-F0-9]+/)
-    ),
-		_left_parenthesis: $ => '(',
-		_right_parenthesis: $ => ')',
-		_left_bracket: $ => '[',
-		_right_bracket: $ => ']',
+		number: $ => choice(
+			token(sep1(hexDigits, /[-\./:]/)),
+			choice(
+				/\d+/,
+				/[0-9a-fA-F]{40}/,
+				/[0-9a-fA-F]{32}/,
+				/[0-9a-fA-F]{10}/,
+				/[0-9a-fA-F]{7}/,
+				/0x[a-fA-F0-9]+/)
+		),
+		_word_separator: $ => choice(
+			'(',
+			')',
+			'T',
+			'[',
+			']',
+		),
 
 		// Match all other things in the log which are not highlighted
 		word: $ => /[^()T\[\]"\s]+/,
