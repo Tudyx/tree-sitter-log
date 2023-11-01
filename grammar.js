@@ -1,12 +1,12 @@
 const
 	hexDigit = /[0-9a-fA-F]/,
 	hexDigits = seq(hexDigit, repeat(seq(optional('_'), hexDigit))),
-	// 2022-12-25
+	// example: 2022-12-25
 	rfc3339_date = /([0-9]+)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])/,
-	// 25/12/2022
+	// example: 25/12/2022
 	cultural_date = /(0[1-9]|[12][0-9]|3[01])[-\./](0[1-9]|1[012])[-\./]([0-9]+)/,
 	rfc3339_delimiter = /[ tT]/,
-	// 09:29:02
+	// example: 09:29:02
 	rfc3339_time = /([01][0-9]|2[0-3]):([0-5][0-9])(:([0-5][0-9]|60))?([\.,][0-9]+)?/,
 	rfc3339_offset = /([zZ])|([+-]([01][0-9]|2[0-3]):[0-5][0-9])/;
 
@@ -122,7 +122,16 @@ module.exports = grammar({
 		// number: $ => token(sep1(hexDigits, /[.:-]/)),
 		// number: $ => choice($._number_w, seq('(', $._number_w, ')')),
 
-		number: $ => token(sep1(hexDigits, /[.:-]/)),
+    number: $ => choice(
+      token(sep1(hexDigits, /[-\.:]/)),
+      choice(
+        /\d+/,
+        /[0-9a-fA-F]{40}/,
+        /[0-9a-fA-F]{32}/,
+        /[0-9a-fA-F]{10}/,
+        /[0-9a-fA-F]{7}/,
+        /0x[a-fA-F0-9]+/)
+    ),
 		_left_parenthesis: $ => '(',
 		_right_parenthesis: $ => ')',
 		_left_bracket: $ => '[',
@@ -145,5 +154,5 @@ module.exports = grammar({
  *
  */
 function sep1(rule, separator) {
-	return seq(rule, repeat(seq(separator, rule)));
+	return seq(rule, repeat1(seq(separator, rule)));
 }

@@ -96,6 +96,11 @@
     }
   },
   {
+    "type": "number",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "string_literal",
     "named": true,
     "fields": {}
@@ -226,10 +231,6 @@
   {
     "type": "info",
     "named": false
-  },
-  {
-    "type": "number",
-    "named": true
   },
   {
     "type": "trace",
