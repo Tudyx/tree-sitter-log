@@ -1,5 +1,10 @@
 [
   {
+    "type": "constant",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "date",
     "named": true,
     "fields": {},
@@ -19,21 +24,6 @@
     }
   },
   {
-    "type": "debug",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "error",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "info",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "log_file",
     "named": true,
     "fields": {},
@@ -41,6 +31,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "constant",
+          "named": true
+        },
         {
           "type": "date",
           "named": true
@@ -111,16 +105,6 @@
     "fields": {}
   },
   {
-    "type": "trace",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "warn",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "\"",
     "named": false
   },
@@ -133,43 +117,7 @@
     "named": false
   },
   {
-    "type": "ALERT",
-    "named": false
-  },
-  {
-    "type": "CRITICAL",
-    "named": false
-  },
-  {
-    "type": "DEBUG",
-    "named": false
-  },
-  {
-    "type": "Debug",
-    "named": false
-  },
-  {
-    "type": "EMERGENCY",
-    "named": false
-  },
-  {
-    "type": "ERROR",
-    "named": false
-  },
-  {
-    "type": "Error",
-    "named": false
-  },
-  {
-    "type": "FAIL",
-    "named": false
-  },
-  {
-    "type": "FAILURE",
-    "named": false
-  },
-  {
-    "type": "FATAL",
+    "type": "=",
     "named": false
   },
   {
@@ -177,47 +125,11 @@
     "named": false
   },
   {
-    "type": "Fatal",
-    "named": false
-  },
-  {
-    "type": "INFO",
-    "named": false
-  },
-  {
-    "type": "Info",
-    "named": false
-  },
-  {
     "type": "T",
     "named": false
   },
   {
-    "type": "TRACE",
-    "named": false
-  },
-  {
-    "type": "Trace",
-    "named": false
-  },
-  {
     "type": "True",
-    "named": false
-  },
-  {
-    "type": "WARN",
-    "named": false
-  },
-  {
-    "type": "WARNING",
-    "named": false
-  },
-  {
-    "type": "Warn",
-    "named": false
-  },
-  {
-    "type": "Warning",
     "named": false
   },
   {
@@ -230,51 +142,31 @@
   },
   {
     "type": "debug",
-    "named": false
+    "named": true
   },
   {
     "type": "error",
-    "named": false
-  },
-  {
-    "type": "error:",
-    "named": false
+    "named": true
   },
   {
     "type": "false",
     "named": false
   },
   {
-    "type": "fatal",
-    "named": false
-  },
-  {
     "type": "info",
-    "named": false
+    "named": true
   },
   {
     "type": "trace",
-    "named": false
+    "named": true
   },
   {
     "type": "true",
     "named": false
   },
   {
-    "type": "verb",
-    "named": false
-  },
-  {
-    "type": "verbose",
-    "named": false
-  },
-  {
     "type": "warn",
-    "named": false
-  },
-  {
-    "type": "warning",
-    "named": false
+    "named": true
   },
   {
     "type": "word",
@@ -283,5 +175,13 @@
   {
     "type": "year_month_day",
     "named": true
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
   }
 ]

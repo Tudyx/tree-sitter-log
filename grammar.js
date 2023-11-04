@@ -30,6 +30,7 @@ module.exports = grammar({
 				$.date,
 				$.string_literal,
 				$.number,
+				$.constant,
 				$._word_separator,
 				$.word
 			)
@@ -41,12 +42,11 @@ module.exports = grammar({
 			$.warn,
 			$.error,
 		),
-		trace: $ => choice("trace", "Trace", "TRACE", "verbose", "verb"),
-		debug: $ => choice("debug", "Debug", "DEBUG"),
-		info: $ => choice("info", "Info", "INFO"),
-		warn: $ => choice("warn", "Warn", "WARN", "warning", "Warning", "WARNING"),
-		// TODO: a more elegant way to handle optional ':' suffix should exist.
-		error: $ => choice("error", "error:", "Error", "ERROR", "ALERT", "CRITICAL", "EMERGENCY", "FAILURE", "FAIL", "fatal", "Fatal", "FATAL"),
+		trace: $ => token(seq(choice("trace", "Trace", "TRACE", "verbose", "verb"), optional(":"))),
+		debug: $ => token(seq(choice("debug", "Debug", "DEBUG"), optional(":"))),
+		info: $ => token(seq(choice("info", "Info", "INFO"), optional(":"))),
+		warn: $ => token(seq(choice("warn", "Warn", "WARN", "warning", "Warning", "WARNING"), optional(":"))),
+		error: $ => token(seq(choice("error", "Error", "ERROR", "ALERT", "CRITICAL", "EMERGENCY", "FAILURE", "FAIL", "fatal", "Fatal", "FATAL"), optional(":"))),
 
 
 		date: $ => choice(
@@ -60,7 +60,7 @@ module.exports = grammar({
 		),
 		_time_with_offset: $ => token(seq(rfc3339_time, optional(' '), rfc3339_offset)),
 		_time_without_offset: $ => token(rfc3339_time),
-		boolean_literal: $ => choice("true", "True", "false", "False"),
+		constant: $ => choice("true", "True", "false", "False"),
 
 		// https://github.com/tree-sitter/tree-sitter-go/blob/bbaa67a180cfe0c943e50c55130918be8efb20bd/grammar.js#L850C1-L880C8
 		string_literal: $ => choice(
@@ -115,10 +115,6 @@ module.exports = grammar({
 			),
 		)),
 
-		// number: $ => token(hexDigits),
-		// number: $ => token(sep1(hexDigits, /[.:-]/)),
-		// number: $ => choice($._number_w, seq('(', $._number_w, ')')),
-
 		number: $ => choice(
 			token(sep1(hexDigits, /[-\./:]/)),
 			choice(
@@ -135,10 +131,14 @@ module.exports = grammar({
 			'T',
 			'[',
 			']',
+			'{',
+			'}',
+			'=',
+			'"'
 		),
 
 		// Match all other things in the log which are not highlighted
-		word: $ => /[^()T\[\]"\s]+/,
+		word: $ => /[^()T\[\]{}="\s]+/,
 	}
 
 });
