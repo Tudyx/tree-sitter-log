@@ -11,4 +11,3 @@ Failed to contact 127.0.0.1 on 127.0.0.1/8
 2022-04-28T08:47:47.260Z TRACE rust::module::path: 123 true "version":1000
 2022-04-28T08:47:47.260Z TRACE rust::module::path: ConnectionError to /ip4/127.0.0.1/tcp/4001/tls
 2022-04-28T08:47:47.260Z TRACE rust::module::path:span{field_id=3}: cache is udpdated=false (1000 bytes)
-{1} {hola="que tal"}

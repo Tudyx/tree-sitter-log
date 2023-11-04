@@ -12,16 +12,7 @@ const
 
 module.exports = grammar({
 	name: 'debug',
-	// conflicts: $ => [
-	//   [$.error_parenthesis, $._left_parenthesis],
-	//   [$.error_parenthesis, $._right_parenthesis]
-	// ],
-
 	// word: $ => $.word,
-	// extras: $ => [
-	//     // $.comment,
-	//     /\s/,
-	//   ],
 
 	rules: {
 		log_file: $ => repeat(
@@ -35,6 +26,8 @@ module.exports = grammar({
 				$.word
 			)
 		),
+
+		// Log level detection.
 		log_level: $ => choice(
 			$.trace,
 			$.debug,
@@ -49,6 +42,7 @@ module.exports = grammar({
 		error: $ => token(seq(choice("error", "Error", "ERROR", "ALERT", "CRITICAL", "EMERGENCY", "FAILURE", "FAIL", "fatal", "Fatal", "FATAL"), optional(":"))),
 
 
+		// Date and time detection.
 		date: $ => choice(
 			$.year_month_day,
 			$.time,
@@ -60,50 +54,31 @@ module.exports = grammar({
 		),
 		_time_with_offset: $ => token(seq(rfc3339_time, optional(' '), rfc3339_offset)),
 		_time_without_offset: $ => token(rfc3339_time),
+
 		constant: $ => choice("true", "True", "false", "False"),
 
+		// String literal detection.
 		// https://github.com/tree-sitter/tree-sitter-go/blob/bbaa67a180cfe0c943e50c55130918be8efb20bd/grammar.js#L850C1-L880C8
 		string_literal: $ => choice(
 			$._raw_string_literal,
-			$._interpreted_string_literal,
-			// $.char_literal,
+			$._interpreted_double_string,
+			$._interpreted_single_string,
 		),
 
-		// char_literal: $ => token(seq(
-		//   optional('b'),
-		//   '\'',
-		//   optional(choice(
-		//     seq('\\', choice(
-		//       /[^xu]/,
-		//       /u[0-9a-fA-F]{4}/,
-		//       /u{[0-9a-fA-F]+}/,
-		//       /x[0-9a-fA-F]{2}/
-		//     )),
-		//     /[^\\']/
-		//   )),
-		//   '\''
-		// )),
 		_raw_string_literal: _ => token(seq(
 			'`',
 			repeat(/[^`]/),
 			'`',
 		)),
-		// _raw_string_literal: _ => token(seq(
-		//   "'",
-		//   repeat(/[^']/),
-		//   "'",
-		// )),
-
-		_interpreted_string_literal: $ => seq(
+		_interpreted_double_string: $ => seq(
 			'"',
 			repeat(choice(
-				$._interpreted_string_literal_basic_content,
+				$._interpreted_double_string_basic_content,
 				$._escape_sequence,
 			)),
 			token.immediate('"'),
 		),
-		_interpreted_string_literal_basic_content: _ => token.immediate(prec(1, /[^"\n\\]+/)),
-
+		_interpreted_double_string_basic_content: _ => token.immediate(prec(1, /[^"\n\\]+/)),
 		_escape_sequence: _ => token.immediate(seq(
 			'\\',
 			choice(
@@ -115,8 +90,19 @@ module.exports = grammar({
 			),
 		)),
 
+		_interpreted_single_string: $ => seq(
+			token(prec(50,"'")),
+			repeat(choice(
+				$._interpreted_single_string_basic_content,
+				$._escape_sequence,
+			)),
+			token.immediate("'"),
+		),
+		_interpreted_single_string_basic_content: _ => token.immediate(prec(1, /[^'\n\\]+/)),
+
+		// Number, ipv6, git hash..
 		number: $ => choice(
-			token(sep1(hexDigits, /[-\./:]/)),
+			token(sep1(hexDigits, /[-\./:](:)?/)),
 			choice(
 				/\d+/,
 				/[0-9a-fA-F]{40}/,
@@ -125,6 +111,7 @@ module.exports = grammar({
 				/[0-9a-fA-F]{7}/,
 				/0x[a-fA-F0-9]+/)
 		),
+
 		_word_separator: $ => choice(
 			'(',
 			')',
@@ -134,11 +121,14 @@ module.exports = grammar({
 			'{',
 			'}',
 			'=',
-			'"'
+			'"',
+			',',
+			':',
+			'/'
 		),
-
 		// Match all other things in the log which are not highlighted
-		word: $ => /[^()T\[\]{}="\s]+/,
+		// Excluded token alllow to match inside word.
+		word: $ => /[^()T\[\]{}="\s,:/]+/,
 	}
 
 });

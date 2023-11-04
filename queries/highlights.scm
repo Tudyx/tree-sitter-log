@@ -3,7 +3,7 @@
 (warn) @warning
 (error) @error
 (year_month_day) @keyword
-(date) @constant
+(time) @constant
 (string_literal) @string
 (number) @constant.builtin
 (constant) @constant.builtin

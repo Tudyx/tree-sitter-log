@@ -423,7 +423,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_interpreted_string_literal"
+          "name": "_interpreted_double_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_interpreted_single_string"
         }
       ]
     },
@@ -450,7 +454,7 @@
         ]
       }
     },
-    "_interpreted_string_literal": {
+    "_interpreted_double_string": {
       "type": "SEQ",
       "members": [
         {
@@ -464,7 +468,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_interpreted_string_literal_basic_content"
+                "name": "_interpreted_double_string_basic_content"
               },
               {
                 "type": "SYMBOL",
@@ -482,7 +486,7 @@
         }
       ]
     },
-    "_interpreted_string_literal_basic_content": {
+    "_interpreted_double_string_basic_content": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "PREC",
@@ -528,6 +532,56 @@
             ]
           }
         ]
+      }
+    },
+    "_interpreted_single_string": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 50,
+            "content": {
+              "type": "STRING",
+              "value": "'"
+            }
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_interpreted_single_string_basic_content"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_escape_sequence"
+              }
+            ]
+          }
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "'"
+          }
+        }
+      ]
+    },
+    "_interpreted_single_string_basic_content": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^'\\n\\\\]+"
+        }
       }
     },
     "number": {
@@ -578,7 +632,7 @@
                   "members": [
                     {
                       "type": "PATTERN",
-                      "value": "[-\\./:]"
+                      "value": "[-\\./:](:)?"
                     },
                     {
                       "type": "SEQ",
@@ -688,12 +742,24 @@
         {
           "type": "STRING",
           "value": "\""
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "STRING",
+          "value": "/"
         }
       ]
     },
     "word": {
       "type": "PATTERN",
-      "value": "[^()T\\[\\]{}=\"\\s]+"
+      "value": "[^()T\\[\\]{}=\"\\s,:/]+"
     }
   },
   "extras": [
