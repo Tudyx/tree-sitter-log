@@ -11,7 +11,7 @@ const
 	rfc3339_offset = /([zZ])|([+-]([01][0-9]|2[0-3]):[0-5][0-9])/;
 
 module.exports = grammar({
-	name: 'debug',
+	name: 'log',
 	// word: $ => $.word,
 
 	rules: {
@@ -124,11 +124,12 @@ module.exports = grammar({
 			'"',
 			',',
 			':',
-			'/'
+			'/',
+			'-'
 		),
 		// Match all other things in the log which are not highlighted
 		// Excluded token alllow to match inside word.
-		word: $ => /[^()T\[\]{}="\s,:/]+/,
+		word: $ => /[^()T\[\]{}="\s,:/\-]+/,
 	}
 
 });

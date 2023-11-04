@@ -1,5 +1,5 @@
 {
-  "name": "debug",
+  "name": "log",
   "rules": {
     "log_file": {
       "type": "REPEAT",
@@ -754,12 +754,16 @@
         {
           "type": "STRING",
           "value": "/"
+        },
+        {
+          "type": "STRING",
+          "value": "-"
         }
       ]
     },
     "word": {
       "type": "PATTERN",
-      "value": "[^()T\\[\\]{}=\"\\s,:/]+"
+      "value": "[^()T\\[\\]{}=\"\\s,:/\\-]+"
     }
   },
   "extras": [
