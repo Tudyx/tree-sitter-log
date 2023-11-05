@@ -35,11 +35,11 @@ module.exports = grammar({
 			$.warn,
 			$.error,
 		),
-		trace: $ => token(seq(choice("trace", "Trace", "TRACE", "verbose", "verb"), optional(":"))),
-		debug: $ => token(seq(choice("debug", "Debug", "DEBUG"), optional(":"))),
-		info: $ => token(seq(choice("info", "Info", "INFO", "INFORMATION", "NOTICE"), optional(":"))),
-		warn: $ => token(seq(choice("warn", "Warn", "WARN", "warning", "Warning", "WARNING"), optional(":"))),
-		error: $ => token(seq(choice("error", "Error", "ERROR", "ALERT", "CRITICAL", "EMERGENCY", "FAILURE", "FAIL", "fatal", "Fatal", "FATAL"), optional(":"))),
+		trace: $ => choice("trace:", "Trace", "TRACE", "[verbose]", "V/", "[verb]", "[vrb]", "[vb]", "[v]", "V/"),
+		debug: $ => choice("debug:", "Debug", "DEBUG", "D/", "[dbug]", "[dbg]", "[de]", "[d]"),
+		info: $ => choice("information:", "Info", "INFO", "INFORMATION", "NOTICE", "I/", "[info]", "[inf]", "[in]", "[i]"),
+		warn: $ => choice("warning:", "Warn", "WARN", "WARNING", "W/", "Warning", "[warn]", "[wrn]", "[wn]", "[w]"),
+		error: $ => choice("error:", "Error", "ERROR", "ALERT", "CRITICAL", "EMERGENCY", "FAILURE", "FAIL", "Fatal", "FATAL", "E/", "[eror]", "[err]", "[er]", "[e]"),
 
 
 		// Date and time detection.
@@ -91,7 +91,7 @@ module.exports = grammar({
 		)),
 
 		_interpreted_single_string: $ => seq(
-			token(prec(50,"'")),
+			token(prec(50, "'")),
 			repeat(choice(
 				$._interpreted_single_string_basic_content,
 				$._escape_sequence,

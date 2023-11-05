@@ -63,245 +63,241 @@
       ]
     },
     "trace": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "trace"
-              },
-              {
-                "type": "STRING",
-                "value": "Trace"
-              },
-              {
-                "type": "STRING",
-                "value": "TRACE"
-              },
-              {
-                "type": "STRING",
-                "value": "verbose"
-              },
-              {
-                "type": "STRING",
-                "value": "verb"
-              }
-            ]
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": ":"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        ]
-      }
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "trace:"
+        },
+        {
+          "type": "STRING",
+          "value": "Trace"
+        },
+        {
+          "type": "STRING",
+          "value": "TRACE"
+        },
+        {
+          "type": "STRING",
+          "value": "[verbose]"
+        },
+        {
+          "type": "STRING",
+          "value": "V/"
+        },
+        {
+          "type": "STRING",
+          "value": "[verb]"
+        },
+        {
+          "type": "STRING",
+          "value": "[vrb]"
+        },
+        {
+          "type": "STRING",
+          "value": "[vb]"
+        },
+        {
+          "type": "STRING",
+          "value": "[v]"
+        },
+        {
+          "type": "STRING",
+          "value": "V/"
+        }
+      ]
     },
     "debug": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "debug"
-              },
-              {
-                "type": "STRING",
-                "value": "Debug"
-              },
-              {
-                "type": "STRING",
-                "value": "DEBUG"
-              }
-            ]
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": ":"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        ]
-      }
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "debug:"
+        },
+        {
+          "type": "STRING",
+          "value": "Debug"
+        },
+        {
+          "type": "STRING",
+          "value": "DEBUG"
+        },
+        {
+          "type": "STRING",
+          "value": "D/"
+        },
+        {
+          "type": "STRING",
+          "value": "[dbug]"
+        },
+        {
+          "type": "STRING",
+          "value": "[dbg]"
+        },
+        {
+          "type": "STRING",
+          "value": "[de]"
+        },
+        {
+          "type": "STRING",
+          "value": "[d]"
+        }
+      ]
     },
     "info": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "info"
-              },
-              {
-                "type": "STRING",
-                "value": "Info"
-              },
-              {
-                "type": "STRING",
-                "value": "INFO"
-              },
-              {
-                "type": "STRING",
-                "value": "INFORMATION"
-              }
-            ]
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": ":"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        ]
-      }
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "information:"
+        },
+        {
+          "type": "STRING",
+          "value": "Info"
+        },
+        {
+          "type": "STRING",
+          "value": "INFO"
+        },
+        {
+          "type": "STRING",
+          "value": "INFORMATION"
+        },
+        {
+          "type": "STRING",
+          "value": "NOTICE"
+        },
+        {
+          "type": "STRING",
+          "value": "I/"
+        },
+        {
+          "type": "STRING",
+          "value": "[info]"
+        },
+        {
+          "type": "STRING",
+          "value": "[inf]"
+        },
+        {
+          "type": "STRING",
+          "value": "[in]"
+        },
+        {
+          "type": "STRING",
+          "value": "[i]"
+        }
+      ]
     },
     "warn": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "warn"
-              },
-              {
-                "type": "STRING",
-                "value": "Warn"
-              },
-              {
-                "type": "STRING",
-                "value": "WARN"
-              },
-              {
-                "type": "STRING",
-                "value": "warning"
-              },
-              {
-                "type": "STRING",
-                "value": "Warning"
-              },
-              {
-                "type": "STRING",
-                "value": "WARNING"
-              }
-            ]
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": ":"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        ]
-      }
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "warning:"
+        },
+        {
+          "type": "STRING",
+          "value": "Warn"
+        },
+        {
+          "type": "STRING",
+          "value": "WARN"
+        },
+        {
+          "type": "STRING",
+          "value": "WARNING"
+        },
+        {
+          "type": "STRING",
+          "value": "W/"
+        },
+        {
+          "type": "STRING",
+          "value": "Warning"
+        },
+        {
+          "type": "STRING",
+          "value": "[warn]"
+        },
+        {
+          "type": "STRING",
+          "value": "[wrn]"
+        },
+        {
+          "type": "STRING",
+          "value": "[wn]"
+        },
+        {
+          "type": "STRING",
+          "value": "[w]"
+        }
+      ]
     },
     "error": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "error"
-              },
-              {
-                "type": "STRING",
-                "value": "Error"
-              },
-              {
-                "type": "STRING",
-                "value": "ERROR"
-              },
-              {
-                "type": "STRING",
-                "value": "ALERT"
-              },
-              {
-                "type": "STRING",
-                "value": "CRITICAL"
-              },
-              {
-                "type": "STRING",
-                "value": "EMERGENCY"
-              },
-              {
-                "type": "STRING",
-                "value": "FAILURE"
-              },
-              {
-                "type": "STRING",
-                "value": "FAIL"
-              },
-              {
-                "type": "STRING",
-                "value": "fatal"
-              },
-              {
-                "type": "STRING",
-                "value": "Fatal"
-              },
-              {
-                "type": "STRING",
-                "value": "FATAL"
-              }
-            ]
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": ":"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        ]
-      }
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "error:"
+        },
+        {
+          "type": "STRING",
+          "value": "Error"
+        },
+        {
+          "type": "STRING",
+          "value": "ERROR"
+        },
+        {
+          "type": "STRING",
+          "value": "ALERT"
+        },
+        {
+          "type": "STRING",
+          "value": "CRITICAL"
+        },
+        {
+          "type": "STRING",
+          "value": "EMERGENCY"
+        },
+        {
+          "type": "STRING",
+          "value": "FAILURE"
+        },
+        {
+          "type": "STRING",
+          "value": "FAIL"
+        },
+        {
+          "type": "STRING",
+          "value": "Fatal"
+        },
+        {
+          "type": "STRING",
+          "value": "FATAL"
+        },
+        {
+          "type": "STRING",
+          "value": "E/"
+        },
+        {
+          "type": "STRING",
+          "value": "[eror]"
+        },
+        {
+          "type": "STRING",
+          "value": "[err]"
+        },
+        {
+          "type": "STRING",
+          "value": "[er]"
+        },
+        {
+          "type": "STRING",
+          "value": "[e]"
+        }
+      ]
     },
     "date": {
       "type": "CHOICE",

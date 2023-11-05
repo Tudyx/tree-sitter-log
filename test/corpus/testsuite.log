@@ -56,32 +56,266 @@ Error [Error] bad_Error [other] [Debug] foo[www bla[Error]bla
   (word))
 
 ================================================================================
-Optional colon suffix
+Log levels
 ================================================================================
 
+ERROR, FAIL, FAILURE
+WARN, WARNING
+INFO, INFORMATION
+DEBUG
+
 error:
-info:
-warn:
+warning:
+debug:
+information:
+
+[ERROR]
+[eror]
+[err]
+[er]
+[e]
+
+[WARNING]
+[warn]
+[wrn]
+[wn]
+[w]
+
+[INFORMATION]
+[info]
+[inf]
+[in]
+[i]
+
+
+[DEBUG]
+[dbug]
+[dbg]
+[de]
+[d]
+
+[VERBOSE]
+[verb]
+[vrb]
+[vb]
+[v]
 --------------------------------------------------------------------------------
 
 (log_file
   (log_level
     (error))
   (log_level
+    (error))
+  (log_level
+    (error))
+  (log_level
+    (warn))
+  (log_level
+    (warn))
+  (log_level
     (info))
   (log_level
-    (warn)))
+    (info))
+  (log_level
+    (debug))
+  (log_level
+    (error))
+  (log_level
+    (warn))
+  (log_level
+    (debug))
+  (log_level
+    (info))
+  (log_level
+    (error))
+  (log_level
+    (error))
+  (log_level
+    (error))
+  (log_level
+    (error))
+  (log_level
+    (error))
+  (log_level
+    (warn))
+  (log_level
+    (warn))
+  (log_level
+    (warn))
+  (log_level
+    (warn))
+  (log_level
+    (warn))
+  (log_level
+    (info))
+  (log_level
+    (info))
+  (log_level
+    (info))
+  (log_level
+    (info))
+  (log_level
+    (info))
+  (log_level
+    (debug))
+  (log_level
+    (debug))
+  (log_level
+    (debug))
+  (log_level
+    (debug))
+  (log_level
+    (debug))
+  (word)
+  (log_level
+    (trace))
+  (log_level
+    (trace))
+  (log_level
+    (trace))
+  (log_level
+    (trace)))
+
+================================================================================
+Log levels that shouldn't be parsed
+================================================================================
+
+error
+eror
+err
+er
+e
+
+warning
+warn
+wrn
+wn
+w
+
+information
+info
+inf
+in
+i
+
+debug
+dbug
+dbg
+de
+d
+
+verbose
+verb
+vrb
+vb
+v
+
+--------------------------------------------------------------------------------
+
+(log_file
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word)
+  (word))
+
+================================================================================
+NLog
+================================================================================
+
+Fatal
+Error
+Warn
+Info
+Debug
+Trace
+--------------------------------------------------------------------------------
+
+(log_file
+  (log_level
+    (error))
+  (log_level
+    (error))
+  (log_level
+    (warn))
+  (log_level
+    (info))
+  (log_level
+    (debug))
+  (log_level
+    (trace)))
+
+================================================================================
+Syslog (RFC 5424)
+================================================================================
+
+EMERGENCY
+ALERT
+CRITICAL
+NOTICE
+--------------------------------------------------------------------------------
+
+(log_file
+  (log_level
+    (error))
+  (log_level
+    (error))
+  (log_level
+    (error))
+  (log_level
+    (info)))
+
+================================================================================
+Android logcat
+================================================================================
+
+E/
+W/
+I/
+D/
+V/
+--------------------------------------------------------------------------------
+
+(log_file
+  (log_level
+    (error))
+  (log_level
+    (warn))
+  (log_level
+    (info))
+  (log_level
+    (debug))
+  (log_level
+    (trace)))
 
 ================================================================================
 Integers are detected
 ================================================================================
 
-Error 112 [112] (112) (-112) 100_000
+112 [112] (112) (-112) 100_000
 --------------------------------------------------------------------------------
 
 (log_file
-  (log_level
-    (error))
   (number)
   (number)
   (number)
@@ -322,7 +556,7 @@ A:F
 A::F
 f.B
 That's the diff.But
-
+man-db:amd64
 --------------------------------------------------------------------------------
 
 (log_file

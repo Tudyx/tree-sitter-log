@@ -16,9 +16,11 @@ https://github.com/helix-editor/helix/blob/1852292451d984de33ea526b3b7dc7f51c613
 
 
 TODO: 
-- url highlight
+- url parsing
+- "wrong hexdigits" test
 - CI
 - ask if they want to add "debug" to theme as we already have info warn err
+- highlight querie: differenciate date and const
 
 
 [VSCode extension]: https://github.com/microsoft/vscode/tree/94c9ea46838a9a619aeafb7e8afd1170c967bb55/extensions/log
