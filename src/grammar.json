@@ -163,6 +163,10 @@
               {
                 "type": "STRING",
                 "value": "INFO"
+              },
+              {
+                "type": "STRING",
+                "value": "INFORMATION"
               }
             ]
           },
@@ -331,16 +335,20 @@
             ]
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[ tT]"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
+            "type": "PREC",
+            "value": 50,
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "[ tT]"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
           }
         ]
       }
@@ -411,6 +419,10 @@
         {
           "type": "STRING",
           "value": "False"
+        },
+        {
+          "type": "STRING",
+          "value": "null"
         }
       ]
     },
@@ -632,7 +644,7 @@
                   "members": [
                     {
                       "type": "PATTERN",
-                      "value": "[-\\./:](:)?"
+                      "value": "[-\\./:_](:)?"
                     },
                     {
                       "type": "SEQ",
@@ -717,10 +729,6 @@
         },
         {
           "type": "STRING",
-          "value": "T"
-        },
-        {
-          "type": "STRING",
           "value": "["
         },
         {
@@ -763,7 +771,7 @@
     },
     "word": {
       "type": "PATTERN",
-      "value": "[^()T\\[\\]{}=\"\\s,:/\\-]+"
+      "value": "[^()\\[\\]{}=\"\\s,:\\-/]+"
     }
   },
   "extras": [

@@ -37,7 +37,7 @@ module.exports = grammar({
 		),
 		trace: $ => token(seq(choice("trace", "Trace", "TRACE", "verbose", "verb"), optional(":"))),
 		debug: $ => token(seq(choice("debug", "Debug", "DEBUG"), optional(":"))),
-		info: $ => token(seq(choice("info", "Info", "INFO"), optional(":"))),
+		info: $ => token(seq(choice("info", "Info", "INFO", "INFORMATION", "NOTICE"), optional(":"))),
 		warn: $ => token(seq(choice("warn", "Warn", "WARN", "warning", "Warning", "WARNING"), optional(":"))),
 		error: $ => token(seq(choice("error", "Error", "ERROR", "ALERT", "CRITICAL", "EMERGENCY", "FAILURE", "FAIL", "fatal", "Fatal", "FATAL"), optional(":"))),
 
@@ -47,7 +47,7 @@ module.exports = grammar({
 			$.year_month_day,
 			$.time,
 		),
-		year_month_day: $ => token(seq(choice(rfc3339_date, cultural_date), optional(rfc3339_delimiter))),
+		year_month_day: $ => token(seq(choice(rfc3339_date, cultural_date), prec(50, optional(rfc3339_delimiter)))),
 		time: $ => choice(
 			$._time_with_offset,
 			$._time_without_offset
@@ -55,7 +55,7 @@ module.exports = grammar({
 		_time_with_offset: $ => token(seq(rfc3339_time, optional(' '), rfc3339_offset)),
 		_time_without_offset: $ => token(rfc3339_time),
 
-		constant: $ => choice("true", "True", "false", "False"),
+		constant: $ => choice("true", "True", "false", "False", "null"),
 
 		// String literal detection.
 		// https://github.com/tree-sitter/tree-sitter-go/blob/bbaa67a180cfe0c943e50c55130918be8efb20bd/grammar.js#L850C1-L880C8
@@ -102,7 +102,8 @@ module.exports = grammar({
 
 		// Number, ipv6, git hash..
 		number: $ => choice(
-			token(sep1(hexDigits, /[-\./:](:)?/)),
+			// Here is the problem, the separator => 
+			token(sep1(hexDigits, /[-\./:_](:)?/)),
 			choice(
 				/\d+/,
 				/[0-9a-fA-F]{40}/,
@@ -115,7 +116,6 @@ module.exports = grammar({
 		_word_separator: $ => choice(
 			'(',
 			')',
-			'T',
 			'[',
 			']',
 			'{',
@@ -129,7 +129,7 @@ module.exports = grammar({
 		),
 		// Match all other things in the log which are not highlighted
 		// Excluded token alllow to match inside word.
-		word: $ => /[^()T\[\]{}="\s,:/\-]+/,
+		word: $ => /[^()\[\]{}="\s,:\-/]+/,
 	}
 
 });
