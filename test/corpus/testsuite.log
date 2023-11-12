@@ -382,7 +382,6 @@ Raw and interpreted string literal
 ================================================================================
 
 DEBUG Username was Some("username") "clasic string literal" foo "key:\"escaped string\"other_thing"
-"
 "lorem ipsum"
 ["don't","won't"]
 --------------------------------------------------------------------------------
