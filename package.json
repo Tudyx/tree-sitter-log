@@ -4,7 +4,7 @@
   "description": "Tree sitter for log files",
   "main": "bindings/node",
   "scripts": {
-    "build": "tree-sitter generate",
+    "build": "tree-sitter generate && node-gyp build",
     "lint": "eslint grammar.js",
     "parse": "tree-sitter parse",
     "test": "tree-sitter test",
