@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es6",
-    "checkJs": false
+    "target": "es2021",
+    "checkJs": true
   },
-  "exclude": ["node_modules"]
+  "include": "grammar.js"
 }

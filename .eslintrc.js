@@ -16,5 +16,6 @@ module.exports = {
       'error',
       {'code': 120, 'ignoreComments': true, 'ignoreUrls': true, 'ignoreStrings': true},
     ],
+    'one-var': ['error', 'consecutive'],  
   },
 };
