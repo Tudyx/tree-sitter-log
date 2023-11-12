@@ -4,7 +4,11 @@
   "description": "Tree sitter for log files",
   "main": "bindings/node",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tree-sitter generate",
+    "lint": "eslint grammar.js",
+    "parse": "tree-sitter parse",
+    "test": "tree-sitter test",
+    "test-windows": "tree-sitter test"
   },
   "keywords": [
     "tree-sitter",
@@ -21,22 +25,17 @@
     "nan": "^2.18.0"
   },
   "devDependencies": {
+    "eslint": "^8.53.0",
+    "eslint-config-google": "^0.14.0",
     "tree-sitter-cli": "^0.20.8"
   },
-  "scripts": {
-    "build": "tree-sitter generate",
-    "lint": "eslint grammar.js",
-    "parse": "tree-sitter parse",
-    "test": "tree-sitter test",
-    "test-windows": "tree-sitter test"
-  },
-	"tree-sitter": [
-		{
-			"scope": "source.log",
-			"file-types": [
-				"log"
-			],
+  "tree-sitter": [
+    {
+      "scope": "source.log",
+      "file-types": [
+        "log"
+      ],
       "injection-regex": "log"
-		}
-	]
+    }
+  ]
 }

@@ -1,3 +1,14 @@
+/**
+ * @file Log grammar for tree-sitter
+ * @license MIT
+ */
+
+/* eslint-disable arrow-parens */
+/* eslint-disable camelcase */
+/* eslint-disable-next-line spaced-comment */
+/// <reference types="tree-sitter-cli/dsl" />
+// @ts-check
+
 const
 	hexDigit = /[0-9a-fA-F]/,
 	hexDigits = seq(hexDigit, repeat(seq(optional('_'), hexDigit))),
