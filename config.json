@@ -1,0 +1,59 @@
+{
+  "parser-directories": [
+    "/home/teddy/dev/rust"
+  ],
+  "theme": {
+    "embedded": null,
+    "number": {
+      "bold": true,
+      "color": 94
+    },
+    "operator": {
+      "color": 239,
+      "bold": true
+    },
+    "module": 136,
+    "punctuation.bracket": 239,
+    "property": 124,
+    "attribute": {
+      "color": 124,
+      "italic": true
+    },
+    "type": 23,
+    "function": 26,
+    "constant.builtin": "#569CD6",
+    "constant.numeric": "#b5cea8",
+    "function.builtin": {
+      "color": 26,
+      "bold": true
+    },
+    "tag": 18,
+    "punctuation.delimiter": 239,
+    "constructor": 136,
+    "variable.parameter": {
+      "underline": true
+    },
+    "variable": "#9CDCFE",
+    "keyword": 56,
+    "string": "#ce9178",
+    "string.special": 30,
+    "constant": 94,
+    "variable.builtin": {
+      "bold": true
+    },
+    "type.builtin": {
+      "color": 23,
+      "bold": true
+    },
+    "diff.plus": "#487e02",    
+    "info": "#75beff",
+    "warning": "#cca700",
+    "error": "#ff1212",
+    "hint": "#eeeeee",
+    "ui.virtual.inlay-hint": "#8b949e",
+    "comment": {
+      "color": "#6A9955",
+      "italic": true
+    }
+  }
+}

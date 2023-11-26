@@ -26,6 +26,7 @@ tree-sitter generate && tree-sitter test
 ### Highlight a file 
 
 You will need to configure a theme for this, see [this link](https://tree-sitter.github.io/tree-sitter/syntax-highlighting).
+An example that defines the theme for the queries can be found in the file *config.json*.
 
 ```sh
 tree-sitter generate && tree-sitter highlight <FILE_PATH>.log
