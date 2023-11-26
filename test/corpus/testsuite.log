@@ -166,7 +166,8 @@ information:
     (debug))
   (log_level
     (debug))
-  (word)
+  (log_level
+    (trace))
   (log_level
     (trace))
   (log_level

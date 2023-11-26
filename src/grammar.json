@@ -79,6 +79,18 @@
         },
         {
           "type": "STRING",
+          "value": "[trace]"
+        },
+        {
+          "type": "STRING",
+          "value": "Verbose"
+        },
+        {
+          "type": "STRING",
+          "value": "VERBOSE"
+        },
+        {
+          "type": "STRING",
           "value": "[verbose]"
         },
         {

@@ -1,3 +1,4 @@
+(trace) @ui.virtual.inlay-hint
 (debug) @diff.plus
 (info) @info
 (warn) @warning
@@ -5,5 +6,5 @@
 (year_month_day) @keyword
 (time) @constant
 (string_literal) @string
-(number) @constant.builtin
+(number) @constant.numeric
 (constant) @constant.builtin

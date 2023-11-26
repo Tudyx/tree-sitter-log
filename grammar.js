@@ -47,7 +47,7 @@ module.exports = grammar({
       $.warn,
       $.error,
     ),
-    trace: $ => choice('trace:', 'Trace', 'TRACE', '[verbose]', 'V/', '[verb]', '[vrb]', '[vb]', '[v]', 'V/'),
+    trace: $ => choice('trace:', 'Trace', 'TRACE','[trace]','Verbose', 'VERBOSE', '[verbose]', 'V/', '[verb]', '[vrb]', '[vb]', '[v]', 'V/'),
     debug: $ => choice('debug:', 'Debug', 'DEBUG', 'D/', '[dbug]', '[dbg]', '[de]', '[d]'),
     info: $ => choice('information:', 'Info', 'INFO', 'INFORMATION', 'NOTICE', 'I/', '[info]', '[inf]', '[in]', '[i]'),
     warn: $ => choice('warning:', 'Warn', 'WARN', 'WARNING', 'W/', 'Warning', '[warn]', '[wrn]', '[wn]', '[w]'),
