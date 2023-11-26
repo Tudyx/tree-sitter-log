@@ -23,7 +23,7 @@ tree-sitter generate
 tree-sitter generate && tree-sitter test
 ```
 
-### Highlight a file. 
+### Highlight a file 
 
 You will need to configure a theme for this, see [this link](https://tree-sitter.github.io/tree-sitter/syntax-highlighting).
 
@@ -33,9 +33,8 @@ tree-sitter generate && tree-sitter highlight <FILE_PATH>.log
 
 ## What can be improved
  
-- url parsing
+- add url parsing
 - *known_failures.log* tests
-- highlight queries: differentiate date and const
 
 [VSCode extension]: https://github.com/microsoft/vscode/tree/94c9ea46838a9a619aeafb7e8afd1170c967bb55/extensions/log
 [this repo]: https://github.com/lpraneis/tree-sitter-tracing-log
